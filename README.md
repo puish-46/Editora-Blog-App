@@ -7,7 +7,7 @@ Editora is a premium, high-performance, and secure full-stack digital publicatio
 
 ---
 
-## 🌟 Elite Core Features
+##  Elite Core Features
 
 ### 1. Immersive Editorial Visual Design
 * **Curated Visual Design System**: Aesthetic dark/light mode tailored HSL colors, smooth transitions, and glassmorphic micro-animations built with Tailwind CSS.
@@ -44,7 +44,7 @@ Editora is a premium, high-performance, and secure full-stack digital publicatio
 
 ---
 
-## 🛠️ Technology Architecture
+##  Technology Architecture
 
 ```mermaid
 graph TD
@@ -63,7 +63,7 @@ graph TD
 
 ---
 
-## 🔒 Production Security Verification
+##  Production Security Verification
 
 Editora conforms to strict modern security best practices:
 1. **Protected Routing Guards**: Frontend client routes are secured using a role-based `<ProtectedRoute>` wrapper checking JWT claims dynamically.
@@ -73,8 +73,7 @@ Editora conforms to strict modern security best practices:
    * **JWT Authentication**: Encrypted cookies marked `HttpOnly` and `SameSite` to secure sessions.
 
 ---
-
-## 🚀 Installation & Local Environment Setup
+##  Installation & Local Environment Setup
 
 ### 1. Prerequisites
 * **Node.js** (v18 or higher)
@@ -126,7 +125,7 @@ npm run dev
 
 ---
 
-## 📈 Recruiter & Portfolio Summary
+##  Recruiter & Portfolio Summary
 
 * **Role Relevance**: Full-Stack Software Engineer / Technical Product Developer.
 * **Resume Highlight**: *Designed and shipped a premium editorial-style publishing platform leveraging React, Vite, Node.js, Mongoose, and Google Gemini AI APIs. Integrated multi-threaded discussion systems, dynamic recency-decay trending scores, and automated Cloudinary formatting, reducing payload weights by up to 90% and boosting initial route load speed by over 80% through dynamic code splitting.*
