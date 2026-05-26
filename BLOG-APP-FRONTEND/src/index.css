@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+/* Class-based Dark Mode Selector Strategy in Tailwind CSS v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Premium Magazine Font Families */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-serif: "Lora", "Playfair Display", Georgia, serif;
+
+  /* Custom Color Tokens for Premium Editorial Aesthetic */
+  --color-accent: #bda075;
+  --color-accent-hover: #a3875d;
+  --color-paper-light: #fafbfd;
+  --color-paper-dark: #0b0c0e;
+  --color-card-light: #f5f6f8;
+  --color-card-dark: #12141c;
+  --color-border-light: #e2e8f0;
+  --color-border-dark: #1f242f;
+  --color-text-light-primary: #12141c;
+  --color-text-light-secondary: #4a5568;
+  --color-text-dark-primary: #f7fafc;
+  --color-text-dark-secondary: #a0aec0;
+}
+
+/* Base Editorial Layout & Transition Enhancements */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
+  }
+  
+  /* Elegant scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(189, 160, 117, 0.2);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(189, 160, 117, 0.4);
+  }
+}
+
+/* Smooth globally applied custom transitions */
+.transition-editorial {
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shadow-editorial {
+  box-shadow: 0 4px 20px -2px rgba(189, 160, 117, 0.05), 0 2px 8px -1px rgba(0, 0, 0, 0.02);
+}
+
+.shadow-editorial-hover {
+  box-shadow: 0 20px 40px -4px rgba(189, 160, 117, 0.12), 0 8px 16px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* Premium prose-editorial styling for Tiptap and Article rendering */
+.prose-editorial {
+  width: 100%;
+}
+.prose-editorial h1 {
+  font-size: 2rem;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+  color: var(--color-text-light-primary);
+}
+.dark .prose-editorial h1 {
+  color: var(--color-text-dark-primary);
+}
+.prose-editorial h2 {
+  font-size: 1.5rem;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+  color: var(--color-text-light-primary);
+}
+.dark .prose-editorial h2 {
+  color: var(--color-text-dark-primary);
+}
+.prose-editorial p {
+  margin-bottom: 1.25rem;
+  line-height: 1.8;
+}
+.prose-editorial ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.prose-editorial ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.prose-editorial li {
+  margin-bottom: 0.5rem;
+}
+.prose-editorial blockquote {
+  border-left: 4px solid var(--color-accent);
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: var(--color-text-light-secondary);
+  margin: 1.75rem 0;
+}
+.dark .prose-editorial blockquote {
+  color: var(--color-text-dark-secondary);
+}
+.prose-editorial pre {
+  background-color: #1a1b26;
+  color: #a9b1d6;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--color-border-light);
+}
+.dark .prose-editorial pre {
+  border: 1px solid var(--color-border-dark);
+}
+.prose-editorial code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background-color: rgba(189, 160, 117, 0.08);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  color: var(--color-accent);
+}
+.prose-editorial hr {
+  border: 0;
+  border-top: 1px solid var(--color-border-light);
+  margin: 2.5rem 0;
+}
+.dark .prose-editorial hr {
+  border-top: 1px solid var(--color-border-dark);
+}
+.prose-editorial img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  margin: 2rem auto;
+  display: block;
+}
+.prose-editorial a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.prose-editorial a:hover {
+  color: var(--color-accent-hover);
+}

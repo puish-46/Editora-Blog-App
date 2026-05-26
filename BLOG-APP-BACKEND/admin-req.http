@@ -1,0 +1,23 @@
+###Admin login
+POST http://localhost:4000/auth/login
+Content-Type: application/json
+
+{
+    "email":"admin1@gmail.com",
+    "password":"ad1@1234"
+}
+
+###Read all users (email)
+GET http://localhost:4000/admin-api/users
+
+###Read all authors (email)
+GET http://localhost:4000/admin-api/authors
+
+
+###Block or active user and author
+PATCH  http://localhost:4000/admin-api/user
+
+{
+    "email":"admin@email.com",
+    "isUserActive":"false"
+}

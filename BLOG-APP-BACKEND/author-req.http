@@ -1,0 +1,63 @@
+###register author
+POST http://localhost:4000/auth/users
+Content-Type: application/json
+
+{
+    "firstName":"Sohanlal",
+    "lastName":"",
+    "email":"so@email.com",
+    "password":"s@123",
+    "role":"AUTHOR",
+    "profileimageurl":"http://example.com/avatars/user.png"
+}
+
+
+### auther login
+POST http://localhost:4000/auth/login
+Content-Type: application/json
+
+{
+    "email":"karthik@email.com",
+    "password":"k@123"
+}
+
+###create new article
+POST http://localhost:4000/author-api/article
+Content-Type: application/json
+
+{
+    "author":"69b38f0521e6381f46c652a9",
+    "title":"article by karthik",
+    "category":"ai engineering",
+    "content":"ai laws"
+}
+
+###read own article
+GET http://localhost:4000/author-api/articles
+
+
+
+###Update article by author
+PUT http://localhost:4000/author-api/article
+Content-Type: application/json
+
+{
+    "articleId":"69b38f0521e6381f46c652a9",
+    "title":"article by karthik",
+    "category":"ai engineering",
+    "content":"ai laws"
+}
+
+
+###delete / restore the article by article id(soft delete)
+PATCH http://localhost:4000/author-api/article
+Content-Type: application/json
+
+{
+    "articleId":"",
+    "isArticleActive":true
+}
+
+
+### User logout
+GET http://localhost:4000/auth/logout
