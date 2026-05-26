@@ -55,6 +55,8 @@ function WriteArticles() {
       ? articleObj.tagsInput.split(",").map(t => t.trim()).filter(Boolean)
       : [];
 
+    delete articleObj.tagsInput;
+
     try {
       setLoading(true);
       setApiError(null);

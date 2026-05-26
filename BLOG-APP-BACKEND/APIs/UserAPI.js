@@ -596,6 +596,65 @@ userApp.get("/articles/trending", verifyToken("USER", "AUTHOR", "ADMIN"), async 
   }
 });
 
+// GET user stats (protected dashboard analytics)
+userApp.get("/profile/stats", verifyToken("USER", "AUTHOR", "ADMIN"), async (req, res, next) => {
+  try {
+    const userId = req.user?.id;
+
+    // Written articles
+    const writtenArticles = await ArticleModel.find({ author: userId, isArticleActive: true });
+    const totalBlogs = writtenArticles.length;
+    const totalLikes = writtenArticles.reduce((acc, curr) => acc + (curr.likes?.length || 0), 0);
+    const totalComments = writtenArticles.reduce((acc, curr) => acc + (curr.comments?.length || 0), 0);
+
+    // Get bookmarks list
+    const userObj = await UserModel.findById(userId);
+    const totalBookmarks = userObj?.bookmarks?.length || 0;
+
+    // Formulate a beautiful "recent activity" list
+    const recentActivity = [];
+    
+    // 1. Articles user has written recently
+    writtenArticles.slice(0, 3).forEach(art => {
+      recentActivity.push({
+        type: "publish",
+        title: `Published "${art.title}"`,
+        time: art.createdAt,
+        id: art._id
+      });
+    });
+
+    // 2. Articles user has liked recently
+    const likedArticles = await ArticleModel.find({ likes: userId, isArticleActive: true }).limit(3);
+    likedArticles.forEach(art => {
+      recentActivity.push({
+        type: "like",
+        title: `Liked "${art.title}"`,
+        time: art.updatedAt || art.createdAt,
+        id: art._id
+      });
+    });
+
+    // Sort recent activity by time descending
+    recentActivity.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+    res.status(200).json({
+      message: "Profile analytics",
+      payload: {
+        stats: {
+          totalBlogs,
+          totalLikes,
+          totalComments,
+          totalBookmarks
+        },
+        recentActivity: recentActivity.slice(0, 5)
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // GET user profile (public profile data)
 userApp.get("/profile/:id", verifyToken("USER", "AUTHOR", "ADMIN"), async (req, res, next) => {
   try {
@@ -654,65 +713,6 @@ userApp.put("/profile/update", verifyToken("USER", "AUTHOR", "ADMIN"), async (re
     // Return updated user details sans password
     const updatedUser = await UserModel.findById(userId).select("-password");
     res.status(200).json({ message: "Profile updated successfully", payload: updatedUser });
-  } catch (err) {
-    next(err);
-  }
-});
-
-// GET user stats (protected dashboard analytics)
-userApp.get("/profile/stats", verifyToken("USER", "AUTHOR", "ADMIN"), async (req, res, next) => {
-  try {
-    const userId = req.user?.id;
-
-    // Written articles
-    const writtenArticles = await ArticleModel.find({ author: userId, isArticleActive: true });
-    const totalBlogs = writtenArticles.length;
-    const totalLikes = writtenArticles.reduce((acc, curr) => acc + (curr.likes?.length || 0), 0);
-    const totalComments = writtenArticles.reduce((acc, curr) => acc + (curr.comments?.length || 0), 0);
-
-    // Get bookmarks list
-    const userObj = await UserModel.findById(userId);
-    const totalBookmarks = userObj?.bookmarks?.length || 0;
-
-    // Formulate a beautiful "recent activity" list
-    const recentActivity = [];
-    
-    // 1. Articles user has written recently
-    writtenArticles.slice(0, 3).forEach(art => {
-      recentActivity.push({
-        type: "publish",
-        title: `Published "${art.title}"`,
-        time: art.createdAt,
-        id: art._id
-      });
-    });
-
-    // 2. Articles user has liked recently
-    const likedArticles = await ArticleModel.find({ likes: userId, isArticleActive: true }).limit(3);
-    likedArticles.forEach(art => {
-      recentActivity.push({
-        type: "like",
-        title: `Liked "${art.title}"`,
-        time: art.updatedAt || art.createdAt,
-        id: art._id
-      });
-    });
-
-    // Sort recent activity by time descending
-    recentActivity.sort((a, b) => new Date(b.time) - new Date(a.time));
-
-    res.status(200).json({
-      message: "Profile analytics",
-      payload: {
-        stats: {
-          totalBlogs,
-          totalLikes,
-          totalComments,
-          totalBookmarks
-        },
-        recentActivity: recentActivity.slice(0, 5)
-      }
-    });
   } catch (err) {
     next(err);
   }

@@ -45,6 +45,8 @@ function EditArticle() {
     modifiedArticleObj.tags = modifiedArticleObj.tagsInput
       ? modifiedArticleObj.tagsInput.split(",").map(t => t.trim()).filter(Boolean)
       : [];
+
+    delete modifiedArticleObj.tagsInput;
     
     try {
       setLoading(true);
