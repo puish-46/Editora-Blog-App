@@ -2,6 +2,9 @@
 
 Editora is a premium, high-performance, and secure full-stack digital publication and editorial magazine platform. Drawing inspiration from standard-defining premium digital mediums like **Apple News**, **Substack**, and **Medium Premium Editorials**, Editora couples aesthetic editorial layout patterns with high-performance production readiness.
 
+* **Live Web Application**: [https://editora-blog-app.vercel.app](https://editora-blog-app.vercel.app)
+* **Production API Service**: [https://editora-blog-app.onrender.com](https://editora-blog-app.onrender.com)
+
 ---
 
 ## 🌟 Elite Core Features

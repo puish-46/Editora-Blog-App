@@ -4,6 +4,8 @@
 
 A Node.js + Express REST API backend for the Blog App. Connects to MongoDB and supports role-based routes for Users, Authors, and Admins.
 
+* **Production API Service**: [https://editora-blog-app.onrender.com](https://editora-blog-app.onrender.com)
+
 ## Project Structure
 
 ```

@@ -4,6 +4,8 @@
 
 A React + Vite frontend for the Blog App. Supports three user roles (User, Author, Admin) with protected routes and global auth state managed using Zustand.
 
+* **Live Frontend Web Application**: [https://editora-blog-app.vercel.app](https://editora-blog-app.vercel.app)
+
 ## Project Structure
 
 ```
